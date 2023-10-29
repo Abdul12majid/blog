@@ -1,0 +1,12 @@
+{% extends 'html_files/base.html' %}
+
+{% block content %}
+
+{{author.first_name}}</br>
+{{author.last_name}}</br>
+{{author.email}}</br>
+
+<a href="{% url 'update-author' author.id %}"> Update </a> | 
+<a href="{% url 'delete-post' author.id %}"> Delete </a>
+
+{% endblock %}

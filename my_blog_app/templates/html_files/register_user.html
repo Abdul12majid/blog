@@ -1,0 +1,14 @@
+{% extends 'html_files/base.html' %}
+
+{% block content %}
+
+{% if form.errors %}
+   {{ errors }}
+{% endif %}
+
+<form action="{% url 'register-user %}" method=POST>
+	{% csrf_token %}
+	{{ form.as_p }}
+</form>
+
+{% endblock %}

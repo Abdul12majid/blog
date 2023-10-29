@@ -1,0 +1,29 @@
+{% extends 'html_files/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="col-lg-8">
+    <div class="row">
+       <div class="col-lg-12">
+            <!-- Blog post-->
+            <div class="card mb-4" style="background-image: url('{% static 'my_blog_app/imgs/Laptop5.jpg' %}')">
+               <a href="#!"><img class="card-img-top" height="250" width="100" src="{% static 'my_blog_app/imgs/Laptop55.jpg' %}" alt="..." /></a>
+               <hr>
+                <div class="card-body">
+                	<center>
+                    <div class="small text-muted">{{post.date}}</div>
+                    <h2 class="card-title h4">{{ post.title }} by </br>{{ post.author }}</h2>
+                     </br></br>
+                     <p>{{ post.write_up }}</p></br>
+                <hr>
+                    <a class="btn btn-primary btn-sm" href="#!">Read more →</a>
+                    </center>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+
+{% endblock %}
