@@ -13,5 +13,6 @@ urlpatterns = [
     path('update_author/<author_id>', views.update_author, name='update-author'),
     path('delete_author/<author_id>', views.delete_author, name='delete-author'),
     path('send_email', views.send_email, name='send-email'),
-    
+    path('add_to_fav/<int:pk>', views.add_to_fav, name='add-to-fav'),
+    path('show_book/<int:pk>', views.show_book, name='show-books'),
 ]

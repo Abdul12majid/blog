@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Author(models.Model):
@@ -20,3 +21,11 @@ class Post(models.Model):
 	def __str__(self):
 		return f'{self.title} by {self.author}'
 	
+
+class Favorite_Book(models.Model):
+	user=models.OneToOneField(User, on_delete=models.CASCADE)
+	name_of_book=models.ManyToManyField('Post', blank=True)
+	xxx = models.CharField("Title", blank=True, null=True, max_length=300)
+
+	def __str__(self):
+		return f'{self.name_of_book}'

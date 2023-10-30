@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 {% load static %}
 <html lang="en">
     <head>
@@ -6,11 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Blog Home - Start Bootstrap Template</title>
+        <title>Blog Posts</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'my_blog_app/assets/favicon.ico' %}" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'my_blog_app/css/styles.css' %}" rel="stylesheet" />
+        <script src="https://kit.fontawesome.com/28fa4b0142.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -23,7 +24,7 @@
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="/view_posts">Posts</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'show-books' request.user.id %}">Show fav books</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'show-books'  request.user.id %}">Show fav books</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
                     </ul>
                 </div>
@@ -32,20 +33,53 @@
         <!-- Page header with logo and tagline-->
         <header class="py-5 bg-light border-bottom mb-4">
 
-            <div class="container" style="{% static 'my_blog_app/imgs/avatar2.jpg' %}">
+            <div class="container" style="">
                 <div class="text-center my-5">
-                    <h1 class="fw-bolder">Welcome to Blog Home!</h1>
-                    <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+                    <h1 class="fw-bolder">Posts Feed </h1>
+                    
                 </div>
             </div>
         </header>
-        <!-- Page content-->
         <div class="container">
             <div class="row">
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     
+                    <div class="row">
+                       
+                        {% for post in posts %}
+                        <div class="col-lg-4">
+                            <!-- Blog post-->
+                            
+                            <div class="card mb-4" style="background-image: url('{% static 'my_blog_app/imgs/Laptop5.jpg' %}')">
+                                <a href="#!"><img class="card-img-top" height="90" width="50" src="{% static 'my_blog_app/imgs/Laptop55.jpg' %}" alt="..." /></a>
+                                <div class="card-body">
+                                    <div class="small text-muted">January 1, 2023</div>
+                                    <h2 class="card-title h4">{{ post.title }} by {{ post.author }}</h2>
+                                     </br></br>
+                                     <form method='POST' action="{% url 'add-to-fav'  post.id %}">
+                                        {% csrf_token %}
+                                        
+                                <button class="btn btn-outline-danger" name="add" value="add" type="submit">Add {{ post.title }}</button>
+                                        
+                                    </form>
+                                    
+                                    <a class="btn btn-primary btn-sm" href="{% url 'view-post' post.id  %}">Read more</a>
+                                    
+                                    
+                                    <a href="{% url 'add-to-fav' post.id %}"> add {{ post.id }} <i class="fa fa-heart-o" style="color:red;"></i></a>
+                                    
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        {% endfor %}
+                    </div>
+
                     
+                    
+                    <!-- Pagination-->
                 
                 </div>
                 <!-- Side widgets-->

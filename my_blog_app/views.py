@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import AuthorForm, PostsForm
 from django.contrib import messages
-from .models import Post, Author
+from .models import Post, Author, Favorite_Book
 from django.conf import settings
 from django.core.mail import send_mail
+from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
@@ -91,3 +92,58 @@ def send_email(request):
 	messages.success(request, ("Email sent"))
 	return redirect('home')
 	
+
+def profile(request, pk):
+	if request.user.is_authenticated:
+		profile=Profile.objects.get(user_id=pk)
+		following=int(profile.follows.count())
+		current_user='w'
+		followers=int(profile.followed_by.count())
+		tweets=Tweet.objects.filter(user_id=pk).order_by('-created_at')
+		if request.method=='POST':
+			current_user_profile=request.user.profile
+			action=request.POST['follow']
+			if action == 'unfollow':
+				current_user_profile.follows.remove(profile)
+			elif action == 'follow':
+				current_user_profile.follows.add(profile)
+			current_user_profile.save()
+		return render(request, 'profile.html', {'profile':profile, 'following':following, 'followers':followers, 'tweets':tweets, 'current_user':current_user})
+
+	else:
+		messages.success(request, ('Kindly Login'))
+		return render(request, 'login_user.html', {})
+
+def add_to_fav(request, pk):
+	get_user = request.user
+	book_id = Post.objects.get(id=pk)
+	get_user.favorite_book.name_of_book.add(book_id)
+	return redirect(request.META.get("HTTP_REFERER"))
+
+def show_book(request, pk):
+	get_user = User.objects.get(id=pk)
+	return render(request, 'html_files/show_books.html', {'get_user':get_user})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
