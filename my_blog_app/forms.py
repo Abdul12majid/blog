@@ -1,11 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Post, Author
-
-class AuthorForm(ModelForm):
-	class Meta:
-		fields = ('first_name', 'last_name', 'email')
-		model = Author
+from .models import Post
 
 class PostsForm(ModelForm):
 	class Meta:
