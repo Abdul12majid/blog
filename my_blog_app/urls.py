@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name="home"),
-    path('register_author', views.register_author, name="register-author"),
+    path('create_account', views.create_account, name="create-account"),
     path('make_post', views.make_post, name='make-post'),
     path('view_posts', views.view_posts, name='view-posts'),
     path('view_post/<post_id>', views.view_post, name='view-post'),
@@ -16,4 +16,6 @@ urlpatterns = [
     path('add_to_fav/<int:pk>', views.add_to_fav, name='add-to-fav'),
     path('show_book/<int:pk>', views.show_book, name='show-books'),
     path('rmv_from_fav/<int:pk>', views.rmv_from_fav, name='rmv-from-fav'),
+
+    path('login_user', views.login_user, name='login-user'),
 ]
