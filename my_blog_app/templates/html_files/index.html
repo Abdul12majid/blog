@@ -23,10 +23,12 @@
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="/view_posts">Posts</a></li>
+                        {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'show-books' request.user.id %}">Bookmarks</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'create-account' %}">Register</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login-user' %}">Login</a></li>
+                        {% endif %}
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'create-account' %}">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'login-user' %}">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -47,9 +49,14 @@
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     
-                    
+                    {% load socialaccount %}
+
+                    <h2>Google Login </h2>
+                    <a href="{% provider_login_url 'google' %}?next=/">Login </a>
                 
                 </div>
+
+                
                 <!-- Side widgets-->
                 <div class="col-lg-4">
                     <!-- Search widget-->
