@@ -18,7 +18,7 @@ class ProfileInline(admin.StackedInline):
 class UserAdmin(admin.ModelAdmin):
 	model=User
 	list_display = ('username', 'email', 'first_name', 'last_name',)
-	fields=('username',)
+	fields=('username', 'email',)
 	inlines=[ProfileInline]
 
 #admin.site.register(Favorite_Book)

@@ -90,7 +90,7 @@ def make_post(request):
 		title = request.POST['title']
 		content = request.POST['content']
 		author = request.user
-		post = Post.objects.create(title=title, author=author, write_up=content)
+		post = Post.objects.create(title=title, author_name=request.user.username, author=author, write_up=content)
 		post.save()
 		return redirect('view-posts')
 	return render(request, 'html_files/make_post.html', {})

@@ -8,7 +8,7 @@ from django.db.models.signals import post_save
 class Post(models.Model):
 	title = models.CharField("Title", blank=False, null=False, max_length=300)
 	author = models.ForeignKey(User, on_delete=models.CASCADE)
-	
+	author_name = models.CharField("Author Name", blank=True, null=True, max_length=300)
 	date = models.DateTimeField('Date Published', auto_now_add=True)
 	write_up = models.TextField("Content", blank=False)
 	
